@@ -349,9 +349,6 @@ mysql> SELECT DISTINCT Course_Name
 +----------------------+
 5 rows in set (0.00 sec)
 
-mysql> SELECT * FROM Students
-    -> WHERE City = 'Pune';
-ERROR 1054 (42S22): Unknown column 'City' in 'where clause'
 mysql> SELECT * FROM Courses
     -> WHERE Credits > 3;
 +-----------+---------------------+---------+
