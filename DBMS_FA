@@ -1,0 +1,563 @@
+mysql> use erp;
+Database changed
+mysql> CREATE TABLE Students (
+    ->     Student_PRN VARCHAR(20) PRIMARY KEY NOT NULL,
+    ->     First_Name VARCHAR(50),
+    ->     Last_Name VARCHAR(50),
+    ->     Student_Email VARCHAR(100),
+    ->     Student_Phone VARCHAR(15),
+    ->     Student_DOB DATE,
+    ->     Student_Course VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO Students (Student_PRN, First_Name, Last_Name, Student_Email, Student_Phone, Student_DOB, Student_Course)
+    -> VALUES
+    -> ('1', 'Ganesh', 'Jadhav', 'ganesh.jadhav@example.com', '9876543210', '2001-04-15', 'BBA'),
+    -> ('2', 'Swapnil', 'Patil', 'swapnil.patil@example.com', '9823456789', '2002-06-20', 'MBA'),
+    -> ('3', 'Rohini', 'Deshpande', 'rohini.deshpande@example.com', '9867564321', '2001-12-10', 'BCA'),
+    -> ('4', 'Pratik', 'Bhosale', 'pratik.bhosale@example.com', '9856453728', '2003-01-25', 'MCA'),
+    -> ('5', 'Tejaswini', 'Kadam', 'tejaswini.kadam@example.com', '9845216879', '2000-08-05', 'BBA');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Faculty (
+    ->     Faculty_ID VARCHAR(20) PRIMARY KEY NOT NULL,
+    ->     Faculty_Name VARCHAR(100),
+    ->     Faculty_Email VARCHAR(100),
+    ->     Faculty_Contact VARCHAR(15),
+    ->     Department VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Faculty (Faculty_ID, Faculty_Name, Faculty_Email, Faculty_Contact, Department)
+    -> VALUES
+    -> ('F1', 'Pramod Deshmukh', 'pramod.deshmukh@example.com', '9876543211', 'Computer Science'),
+    -> ('F2', 'Ramesh Shinde', 'ramesh.shinde@example.com', '9823456788', 'Management'),
+    -> ('F3', 'Vaishali Kulkarni', 'vaishali.kulkarni@example.com', '9856234711', 'IT'),
+    -> ('F4', 'Sandeep Pawar', 'sandeep.pawar@example.com', '9845123675', 'Finance'),
+    -> ('F5', 'Neha Joshi', 'neha.joshi@example.com', '9834562874', 'Marketing');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Courses (
+    ->     Course_ID VARCHAR(20) PRIMARY KEY NOT NULL,
+    ->     Course_Name VARCHAR(100),
+    ->     Credits INT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Courses (Course_ID, Course_Name, Credits)
+    -> VALUES
+    -> ('C1', 'Python Programming', 4),
+    -> ('C2', 'Business Analytics', 3),
+    -> ('C3', 'Digital Marketing', 4),
+    -> ('C4', 'Financial Accounting', 3),
+    -> ('C5', 'Database Management', 4);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Enrollment (
+    ->     Student_PRN VARCHAR(20),
+    ->     Course_ID VARCHAR(20),
+    ->     PRIMARY KEY (Student_PRN, Course_ID),
+    ->     FOREIGN KEY (Student_PRN) REFERENCES Students(Student_PRN),
+    ->     FOREIGN KEY (Course_ID) REFERENCES Courses(Course_ID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql> INSERT INTO Enrollment (Student_PRN, Course_ID)
+    -> VALUES
+    -> ('1', 'C1'),
+    -> ('2', 'C2'),
+    -> ('3', 'C3'),
+    -> ('4', 'C4'),
+    -> ('5', 'C5');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> CREATE TABLE Attendance (
+    ->     Student_ID VARCHAR(20) PRIMARY KEY NOT NULL,
+    ->     Course_Name VARCHAR(100),
+    ->     Status VARCHAR(2) CHECK (Status IN ('A', 'P'))
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Attendance (Student_ID, Course_Name, Status)
+    -> VALUES
+    -> ('1', 'Python Programming', 'P'),
+    -> ('2', 'Business Analytics', 'A'),
+    -> ('3', 'Digital Marketing', 'P'),
+    -> ('4', 'Financial Accounting', 'P'),
+    -> ('5', 'Database Management', 'A');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> CREATE TABLE Faculty_Salary (
+    ->     Faculty_ID VARCHAR(20) ,
+    ->     Amount DECIMAL(10,2),
+    ->     Department VARCHAR(100),
+    ->     PRIMARY KEY (Faculty_ID),
+    ->     FOREIGN KEY (Faculty_ID) REFERENCES Faculty(Faculty_ID)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Faculty_Salary (Faculty_ID, Amount, Department)
+    -> VALUES
+    -> ('F1', 70000.00, 'Computer Science'),
+    -> ('F2', 65000.00, 'Management'),
+    -> ('F3', 60000.00, 'IT'),
+    -> ('F4', 75000.00, 'Finance'),
+    -> ('F5', 67000.00, 'Marketing');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> CREATE TABLE Fees (
+    ->     Student_PRN VARCHAR(20),
+    ->     Course_Name VARCHAR(100),
+    ->     Amount DECIMAL(10,2),
+    ->     Dept_ID VARCHAR(20),
+    ->     PRIMARY KEY (Student_PRN, Course_Name)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Fees (Student_PRN, Course_Name, Amount, Dept_ID)
+    -> VALUES
+    -> ('SP1', 'Python Programming', 15000.00, 'D001'),
+    -> ('SP2', 'Business Analytics', 18000.00, 'D002'),
+    -> ('SP3', 'Digital Marketing', 16000.00, 'D003'),
+    -> ('SP4', 'Financial Accounting', 14000.00, 'D004'),
+    -> ('SP5', 'Database Management', 17500.00, 'D005');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Feedback (
+    ->     Student_PRN VARCHAR(20),
+    ->     Course_Name VARCHAR(100),
+    ->     Message TEXT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Feedback (Student_PRN, Course_Name, Message)
+    -> VALUES
+    -> ('01', 'Python Programming', 'Great course!'),
+    -> ('02', 'Business Analytics', 'Very informative sessions.'),
+    -> ('03', 'Digital Marketing', 'Good content, but needs more case studies.'),
+    -> ('04', 'Financial Accounting', 'Helpful for understanding finance.'),
+
+    -> ('05', 'Database Management', 'Well-structured and practical.');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> CREATE TABLE Department (
+    ->     Dept_ID VARCHAR(20) PRIMARY KEY,
+    ->     Dept_Name VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Department (Dept_ID, Dept_Name)
+    -> VALUES
+    -> ('D1', 'Computer Science'),
+    -> ('D2', 'Management'),
+    -> ('D3', 'IT'),
+    -> ('D4', 'Finance'),
+    -> ('D5', 'Marketing');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> CREATE TABLE Exam (
+    ->     Course_Name VARCHAR(100),
+    ->     Date DATE,
+    ->     Time TIME
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Exam (Course_Name, Date, Time)
+    -> VALUES
+    -> ('Python Programming', '2025-05-10', '10:00:00'),
+    -> ('Business Analytics', '2025-05-12', '11:00:00'),
+    -> ('Digital Marketing', '2025-05-14', '10:30:00'),
+    -> ('Financial Accounting', '2025-05-16', '12:00:00'),
+    -> ('Database Management', '2025-05-18', '09:30:00');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++----------------+
+| Tables_in_erp  |
++----------------+
+| attendance     |
+| courses        |
+| department     |
+| enrollment     |
+| exam           |
+| faculty        |
+| faculty_salary |
+| feedback       |
+| fees           |
+| students       |
++----------------+
+10 rows in set (0.01 sec)
+
+mysql> select*from department;
++---------+------------------+
+| Dept_ID | Dept_Name        |
++---------+------------------+
+| D1      | Computer Science |
+| D2      | Management       |
+| D3      | IT               |
+| D4      | Finance          |
+| D5      | Marketing        |
++---------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from enrollment;
++-------------+-----------+
+| Student_PRN | Course_ID |
++-------------+-----------+
+| 1           | C1        |
+| 2           | C2        |
+| 3           | C3        |
+| 4           | C4        |
+| 5           | C5        |
++-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select*from exam;
++----------------------+------------+----------+
+| Course_Name          | Date       | Time     |
++----------------------+------------+----------+
+| Python Programming   | 2025-05-10 | 10:00:00 |
+| Business Analytics   | 2025-05-12 | 11:00:00 |
+| Digital Marketing    | 2025-05-14 | 10:30:00 |
+| Financial Accounting | 2025-05-16 | 12:00:00 |
+| Database Management  | 2025-05-18 | 09:30:00 |
++----------------------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select*from faculty;
++------------+-------------------+-------------------------------+-----------------+------------------+
+| Faculty_ID | Faculty_Name      | Faculty_Email                 | Faculty_Contact | Department       |
++------------+-------------------+-------------------------------+-----------------+------------------+
+| F1         | Pramod Deshmukh   | pramod.deshmukh@example.com   | 9876543211      | Computer Science |
+| F2         | Ramesh Shinde     | ramesh.shinde@example.com     | 9823456788      | Management       |
+| F3         | Vaishali Kulkarni | vaishali.kulkarni@example.com | 9856234711      | IT               |
+| F4         | Sandeep Pawar     | sandeep.pawar@example.com     | 9845123675      | Finance          |
+| F5         | Neha Joshi        | neha.joshi@example.com        | 9834562874      | Marketing        |
++------------+-------------------+-------------------------------+-----------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from faculty_salary;
++------------+----------+------------------+
+| Faculty_ID | Amount   | Department       |
++------------+----------+------------------+
+| F1         | 70000.00 | Computer Science |
+| F2         | 65000.00 | Management       |
+| F3         | 60000.00 | IT               |
+| F4         | 75000.00 | Finance          |
+| F5         | 67000.00 | Marketing        |
++------------+----------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from feedback;
++-------------+----------------------+--------------------------------------------+
+| Student_PRN | Course_Name          | Message
+      |
++-------------+----------------------+--------------------------------------------+
+| 01          | Python Programming   | Great course!
+      |
+| 02          | Business Analytics   | Very informative sessions.
+      |
+| 03          | Digital Marketing    | Good content, but needs more case studies. |
+| 04          | Financial Accounting | Helpful for understanding finance.         |
+| 05          | Database Management  | Well-structured and practical.             |
++-------------+----------------------+--------------------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from fees;
++-------------+----------------------+----------+---------+
+| Student_PRN | Course_Name          | Amount   | Dept_ID |
++-------------+----------------------+----------+---------+
+| SP1         | Python Programming   | 15000.00 | D001    |
+| SP2         | Business Analytics   | 18000.00 | D002    |
+| SP3         | Digital Marketing    | 16000.00 | D003    |
+| SP4         | Financial Accounting | 14000.00 | D004    |
+| SP5         | Database Management  | 17500.00 | D005    |
++-------------+----------------------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select*from students;
++-------------+------------+-----------+------------------------------+---------------+-------------+----------------+
+| Student_PRN | First_Name | Last_Name | Student_Email                | Student_Phone | Student_DOB | Student_Course |
++-------------+------------+-----------+------------------------------+---------------+-------------+----------------+
+| 1           | Ganesh     | Jadhav    | ganesh.jadhav@example.com    | 9876543210    | 2001-04-15  | BBA            |
+| 2           | Swapnil    | Patil     | swapnil.patil@example.com    | 9823456789    | 2002-06-20  | MBA            |
+| 3           | Rohini     | Deshpande | rohini.deshpande@example.com | 9867564321    | 2001-12-10  | BCA            |
+| 4           | Pratik     | Bhosale   | pratik.bhosale@example.com   | 9856453728    | 2003-01-25  | MCA            |
+| 5           | Tejaswini  | Kadam     | tejaswini.kadam@example.com  | 9845216879    | 2000-08-05  | BBA            |
++-------------+------------+-----------+------------------------------+---------------+-------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from attendance;
++------------+----------------------+--------+
+| Student_ID | Course_Name          | Status |
++------------+----------------------+--------+
+| 1          | Python Programming   | P      |
+| 2          | Business Analytics   | A      |
+| 3          | Digital Marketing    | P      |
+| 4          | Financial Accounting | P      |
+| 5          | Database Management  | A      |
++------------+----------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select*from courses;
++-----------+----------------------+---------+
+| Course_ID | Course_Name          | Credits |
++-----------+----------------------+---------+
+| C1        | Python Programming   |       4 |
+| C2        | Business Analytics   |       3 |
+| C3        | Digital Marketing    |       4 |
+| C4        | Financial Accounting |       3 |
+| C5        | Database Management  |       4 |
++-----------+----------------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT Course_Name
+    -> FROM Courses;
++----------------------+
+| Course_Name          |
++----------------------+
+| Python Programming   |
+| Business Analytics   |
+| Digital Marketing    |
+| Financial Accounting |
+| Database Management  |
++----------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Students
+    -> WHERE City = 'Pune';
+ERROR 1054 (42S22): Unknown column 'City' in 'where clause'
+mysql> SELECT * FROM Courses
+    -> WHERE Credits > 3;
++-----------+---------------------+---------+
+| Course_ID | Course_Name         | Credits |
++-----------+---------------------+---------+
+| C1        | Python Programming  |       4 |
+| C3        | Digital Marketing   |       4 |
+| C5        | Database Management |       4 |
++-----------+---------------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Faculty
+    -> WHERE Department = 'Computer Science';
++------------+-----------------+-----------------------------+-----------------+------------------+
+| Faculty_ID | Faculty_Name    | Faculty_Email               | Faculty_Contact | Department       |
++------------+-----------------+-----------------------------+-----------------+------------------+
+| F1         | Pramod Deshmukh | pramod.deshmukh@example.com | 9876543211      | Computer Science |
++------------+-----------------+-----------------------------+-----------------+------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Students
+    -> WHERE Student_Phone LIKE '987%';
++-------------+------------+-----------+---------------------------+---------------+-------------+----------------+
+| Student_PRN | First_Name | Last_Name | Student_Email             | Student_Phone | Student_DOB | Student_Course |
++-------------+------------+-----------+---------------------------+---------------+-------------+----------------+
+| 1           | Ganesh     | Jadhav    | ganesh.jadhav@example.com | 9876543210    | 2001-04-15  | BBA            |
++-------------+------------+-----------+---------------------------+---------------+-------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Feedback
+    -> WHERE Course_Name = 'Python Programming';
++-------------+--------------------+---------------+
+| Student_PRN | Course_Name        | Message       |
++-------------+--------------------+---------------+
+| 01          | Python Programming | Great course! |
++-------------+--------------------+---------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> SELECT Student_PRN, First_Name, Last_Name
+    -> FROM Students
+    -> ORDER BY Last_Name ASC;
++-------------+------------+-----------+
+| Student_PRN | First_Name | Last_Name |
++-------------+------------+-----------+
+| 4           | Pratik     | Bhosale   |
+| 3           | Rohini     | Deshpande |
+| 1           | Ganesh     | Jadhav    |
+| 5           | Tejaswini  | Kadam     |
+| 2           | Swapnil    | Patil     |
++-------------+------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Course_ID, Course_Name, Credits
+    -> FROM Courses
+    -> ORDER BY Credits DESC;
++-----------+----------------------+---------+
+| Course_ID | Course_Name          | Credits |
++-----------+----------------------+---------+
+| C1        | Python Programming   |       4 |
+| C3        | Digital Marketing    |       4 |
+| C5        | Database Management  |       4 |
+| C2        | Business Analytics   |       3 |
+| C4        | Financial Accounting |       3 |
++-----------+----------------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Student_PRN, Amount
+    -> FROM Fees
+    -> WHERE Amount BETWEEN 10000 AND 20000;
++-------------+----------+
+| Student_PRN | Amount   |
++-------------+----------+
+| SP1         | 15000.00 |
+| SP2         | 18000.00 |
+| SP3         | 16000.00 |
+| SP4         | 14000.00 |
+| SP5         | 17500.00 |
++-------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Course_Name, Date, Time
+    -> FROM Exam
+    -> WHERE Date BETWEEN '2025-05-01' AND '2025-06-30';
++----------------------+------------+----------+
+| Course_Name          | Date       | Time     |
++----------------------+------------+----------+
+| Python Programming   | 2025-05-10 | 10:00:00 |
+| Business Analytics   | 2025-05-12 | 11:00:00 |
+| Digital Marketing    | 2025-05-14 | 10:30:00 |
+| Financial Accounting | 2025-05-16 | 12:00:00 |
+| Database Management  | 2025-05-18 | 09:30:00 |
++----------------------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Student_Course, COUNT(Student_PRN) AS Total_Students
+    -> FROM Students
+    -> GROUP BY Student_Course;
++----------------+----------------+
+| Student_Course | Total_Students |
++----------------+----------------+
+| BBA            |              2 |
+| MBA            |              1 |
+| BCA            |              1 |
+| MCA            |              1 |
++----------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Dept_ID, SUM(Amount) AS Total_Fees
+    -> FROM Fees
+    -> GROUP BY Dept_ID;
++---------+------------+
+| Dept_ID | Total_Fees |
++---------+------------+
+| D001    |   15000.00 |
+| D002    |   18000.00 |
+| D003    |   16000.00 |
+| D004    |   14000.00 |
+| D005    |   17500.00 |
++---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Student_Course, COUNT(Student_PRN) AS Total_Students
+    -> FROM Students
+    -> GROUP BY Student_Course
+    -> HAVING COUNT(Student_PRN) > 5;
+Empty set (0.00 sec)
+
+mysql> SELECT Department, SUM(Amount) AS Total_Salary
+    -> FROM Faculty_Salary
+    -> GROUP BY Department
+    -> HAVING SUM(Amount) > 100000;
+Empty set (0.00 sec)
+
+mysql> select*from students;
++-------------+------------+-----------+------------------------------+---------------+-------------+----------------+
+| Student_PRN | First_Name | Last_Name | Student_Email                | Student_Phone | Student_DOB | Student_Course |
++-------------+------------+-----------+------------------------------+---------------+-------------+----------------+
+| 1           | Ganesh     | Jadhav    | ganesh.jadhav@example.com    | 9876543210    | 2001-04-15  | BBA            |
+| 2           | Swapnil    | Patil     | swapnil.patil@example.com    | 9823456789    | 2002-06-20  | MBA            |
+| 3           | Rohini     | Deshpande | rohini.deshpande@example.com | 9867564321    | 2001-12-10  | BCA            |
+| 4           | Pratik     | Bhosale   | pratik.bhosale@example.com   | 9856453728    | 2003-01-25  | MCA            |
+| 5           | Tejaswini  | Kadam     | tejaswini.kadam@example.com  | 9845216879    | 2000-08-05  | BBA            |
++-------------+------------+-----------+------------------------------+---------------+-------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Student_Course, COUNT(Student_PRN) AS Total_Students
+    -> FROM Students
+    -> GROUP BY Student_Course;
++----------------+----------------+
+| Student_Course | Total_Students |
++----------------+----------------+
+| BBA            |              2 |
+| MBA            |              1 |
+| BCA            |              1 |
+| MCA            |              1 |
++----------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Students.Student_PRN, Students.First_Name, Courses.Course_Name
+
+    -> FROM Students
+    -> INNER JOIN Enrollment ON Students.Student_PRN = Enrollment.Student_PRN
+    -> INNER JOIN Courses ON Enrollment.Course_ID = Courses.Course_ID;
++-------------+------------+----------------------+
+| Student_PRN | First_Name | Course_Name          |
++-------------+------------+----------------------+
+| 1           | Ganesh     | Python Programming   |
+| 2           | Swapnil    | Business Analytics   |
+| 3           | Rohini     | Digital Marketing    |
+| 4           | Pratik     | Financial Accounting |
+| 5           | Tejaswini  | Database Management  |
++-------------+------------+----------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Students.Student_PRN, Students.First_Name, Courses.Course_Name
+
+    -> FROM Students
+    -> LEFT JOIN Enrollment ON Students.Student_PRN = Enrollment.Student_PRN
+
+    -> LEFT JOIN Courses ON Enrollment.Course_ID = Courses.Course_ID;
++-------------+------------+----------------------+
+| Student_PRN | First_Name | Course_Name          |
++-------------+------------+----------------------+
+| 1           | Ganesh     | Python Programming   |
+| 2           | Swapnil    | Business Analytics   |
+| 3           | Rohini     | Digital Marketing    |
+| 4           | Pratik     | Financial Accounting |
+| 5           | Tejaswini  | Database Management  |
++-------------+------------+----------------------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> SELECT Courses.Course_ID, Courses.Course_Name, Students.First_Name
+    -> FROM Students
+    -> RIGHT JOIN Enrollment ON Students.Student_PRN = Enrollment.Student_PRN
+    -> RIGHT JOIN Courses ON Enrollment.Course_ID = Courses.Course_ID;
++-----------+----------------------+------------+
+| Course_ID | Course_Name          | First_Name |
++-----------+----------------------+------------+
+| C1        | Python Programming   | Ganesh     |
+| C2        | Business Analytics   | Swapnil    |
+| C3        | Digital Marketing    | Rohini     |
+| C4        | Financial Accounting | Pratik     |
+| C5        | Database Management  | Tejaswini  |
++-----------+----------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql>
