@@ -1,0 +1,464 @@
+$ 
+$ wget https://cdn.cs50.net/sql/2024/x/psets/0/views.zip
+--2025-03-16 15:29:55--  https://cdn.cs50.net/sql/2024/x/psets/0/views.zip
+Resolving cdn.cs50.net (cdn.cs50.net)... 108.158.46.99, 108.158.46.91, 108.158.46.59, ...
+Connecting to cdn.cs50.net (cdn.cs50.net)|108.158.46.99|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5909 (5.8K) [application/zip]
+Saving to: ‘views.zip’
+
+views.zip                             100%[======================================================================>]   5.77K  --.-KB/s    in 0s      
+
+2025-03-16 15:29:55 (1.10 GB/s) - ‘views.zip’ saved [5909/5909]
+
+$ unzip views.zip
+Archive:  views.zip
+   creating: views/
+ extracting: views/4.sql             
+ extracting: views/5.sql             
+ extracting: views/7.sql             
+  inflating: views/views.db          
+ extracting: views/6.sql             
+ extracting: views/2.sql             
+ extracting: views/3.sql             
+ extracting: views/1.sql             
+ extracting: views/8.sql             
+ extracting: views/9.sql             
+ extracting: views/10.sql            
+$ rm views.zip
+rm: remove regular file 'views.zip'? 
+$ cd views
+views/ $ 
+views/ $ ls
+10.sql  1.sql  2.sql  3.sql  4.sql  5.sql  6.sql  7.sql  8.sql  9.sql  views.db
+views/ $ 
+views/ $ 
+views/ $ sqlite3 views.db
+sqlite> show tables;
+Parse error: near "show": syntax error
+  show tables;
+  ^--- error here
+sqlite> SHOW TABLES;
+Parse error: near "SHOW": syntax error
+  SHOW TABLES;
+  ^--- error here
+sqlite> SELECT * FROM views;
++----+--------------+-----------------------------------------------------------------------------------+----------------+-----------+---------------+------------+----------+---------+
+| id | print_number |                                   english_title                                   | japanese_title |  artist   | average_color | brightness | contrast | entropy |
++----+--------------+-----------------------------------------------------------------------------------+----------------+-----------+---------------+------------+----------+---------+
+| 1  | 1            | The Great Wave off Kanagawa                                                       | 神奈川沖浪裏   | Hokusai   | #999f8f       | 0.61       | 0.47     | 7.37    |
+| 2  | 2            | Fine Wind, Clear Morning                                                          | 凱風快晴       | Hokusai   | #756c73       | 0.44       | 0.5      | 7.31    |
+| 3  | 3            | Thunderstorm Beneath the Summit                                                   | 山下白雨       | Hokusai   | #5e564b       | 0.34       | 0.64     | 7.22    |
+| 4  | 4            | Under Mannen Bridge at Fukagawa                                                   | 深川万年橋下   | Hokusai   | #aaa999       | 0.66       | 0.44     | 7.42    |
+| 5  | 5            | Sundai, Edo                                                                       | 東都駿台       | Hokusai   | #a9a68d       | 0.64       | 0.43     | 7.35    |
+| 6  | 6            | Cushion Pine at Aoyama                                                            | 青山円座松     | Hokusai   | #8a907e       | 0.55       | 0.61     | 7.43    |
+| 7  | 7            | Senju, Musashi But                                                                | 武州千住       | Hokusai   | #a2a38d       | 0.63       | 0.46     | 7.43    |
+| 8  | 8            | Inume Pass, Kōshū                                                                 | 甲州犬目峠     | Hokusai   | #b7b197       | 0.69       | 0.43     | 7.26    |
+| 9  | 9            | Fuji View Field in Owari Province                                                 | 尾州不二見原   | Hokusai   | #bcb39f       | 0.71       | 0.42     | 7.34    |
+| 10 | 10           | Ejiri in Suruga Province                                                          | 駿州江尻       | Hokusai   | #b6ae99       | 0.68       | 0.41     | 7.33    |
+| 11 | 11           | A sketch of the Mitsui shop in Suruga in Edo                                      | 江都駿河町三井 | Hokusai   | #a3a38e       | 0.63       | 0.61     | 7.4     |
+| 12 | 12           | Sunset across the Ryōgoku bridge from the bank of the Sumida River at Onmayagashi | 御厩川岸より両 | Hokusai   | #8ba1a5       | 0.61       | 0.57     | 7.67    |
+| 13 | 13           | Sazai hall - Temple of Five Hundred Rakan                                         | 五百らかん寺さ | Hokusai   | #aaaa94       | 0.66       | 0.42     | 7.46    |
+| 14 | 14           | Tea house at Koishikawa. The morning after a snowfall                             | 礫川雪の旦     | Hokusai   | #a1a7a8       | 0.65       | 0.48     | 7.34    |
+| 15 | 15           | Shimomeguro                                                                       | 下目黒         | Hokusai   | #bdb091       | 0.69       | 0.39     | 7.15    |
+| 16 | 16           | Watermill at Onden                                                                | 隠田の水車     | Hokusai   | #b2ab91       | 0.67       | 0.4      | 7.39    |
+| 17 | 17           | Enoshima in Sagami Province                                                       | 相州江の島     | Hokusai   | #ac9e7a       | 0.62       | 0.53     | 7.33    |
+| 18 | 18           | Shore of Tago Bay, Ejiri at Tōkaidō                                               | 東海道江尻田子 | Hokusai   | #b0ac94       | 0.67       | 0.41     | 7.31    |
+| 19 | 19           | Yoshida at Tōkaidō                                                                | 東海道吉田     | Hokusai   | #b0ab96       | 0.67       | 0.44     | 7.49    |
+| 20 | 20           | The Kazusa Province sea route                                                     | 上総の海路     | Hokusai   | #b6b1a2       | 0.69       | 0.46     | 7.36    |
+| 21 | 21           | Nihonbashi bridge in Edo                                                          | 江戸日本橋     | Hokusai   | #bcb69f       | 0.71       | 0.46     | 7.3     |
+| 22 | 22           | Barrier Town on the Sumida River                                                  | 隅田川関屋の里 | Hokusai   | #b3b399       | 0.69       | 0.42     | 7.48    |
+| 23 | 23           | Bay of Noboto                                                                     | 登戸浦         | Hokusai   | #aca791       | 0.65       | 0.39     | 7.46    |
+| 24 | 24           | The lake of Hakone in Sagami Province                                             | 相州箱根湖水   | Hokusai   | #8f9b86       | 0.59       | 0.45     | 7.42    |
+| 25 | 25           | Mount Fuji reflects in Lake Kawaguchi, seen from the Misaka Pass in Kai Province  | 甲州三坂水面   | Hokusai   | #afb89c       | 0.7        | 0.31     | 7.17    |
+| 26 | 26           | Hodogaya on the Tōkaidō                                                           | 東海道保土ケ谷 | Hokusai   | #9c9f97       | 0.62       | 0.5      | 7.57    |
+| 27 | 27           | Tama River in Musashi Province                                                    | 武州玉川       | Hokusai   | #a6a799       | 0.65       | 0.41     | 7.48    |
+| 28 | 28           | Asakusa Hongan-ji temple in the Eastern capital                                   | 東都浅草本願寺 | Hokusai   | #a1a7a7       | 0.65       | 0.65     | 6.92    |
+| 29 | 29           | Tsukuda Island in Musashi Province                                                | 武陽佃島       | Hokusai   | #aaada0       | 0.67       | 0.49     | 7.39    |
+| 30 | 30           | Shichiri beach in Sagami Province                                                 | 相州七里浜     | Hokusai   | #b4b9a9       | 0.71       | 0.44     | 7.38    |
+| 31 | 31           | Umezawa in Sagami Province                                                        | 相州梅沢庄     | Hokusai   | #939d8e       | 0.6        | 0.62     | 7.33    |
+| 32 | 32           | Kajikazawa in Kai Province                                                        | 甲州石班沢     | Hokusai   | #919b8d       | 0.59       | 0.33     | 6.32    |
+| 33 | 33           | Mishima Pass in Kai Province                                                      | 甲州三嶌越     | Hokusai   | #b0b4a3       | 0.69       | 0.43     | 7.38    |
+| 34 | 34           | Mount Fuji from the mountains of Tōtōmi                                           | 遠江山中       | Hokusai   | #adb3a3       | 0.69       | 0.4      | 7.44    |
+| 35 | 35           | A View of Mount Fuji Across Lake Suwa                                             | 信州諏訪湖     | Hokusai   | #bebfb7       | 0.75       | 0.44     | 7.02    |
+| 36 | 36           | Ushibori in Hitachi Province                                                      | 常州牛掘       | Hokusai   | #acae9d       | 0.67       | 0.39     | 7.4     |
+| 37 | 1            | Ichikoku Bridge in the Eastern Capital                                            | 東都一石ばし   | Hiroshige | #7e796e       | 0.48       | 0.38     | 7.34    |
+| 38 | 2            | The Suruga District in the Eastern Capital                                        | 東都駿河町     | Hiroshige | #918b6e       | 0.54       | 0.53     | 7.82    |
+| 39 | 3            | Sukiyagashi in the Eastern Capital                                                | 東都数奇屋河岸 | Hiroshige | #a79b88       | 0.61       | 0.39     | 7.2     |
+| 40 | 4            | Off Tsukuda Island in the Eastern Capital                                         | 東都佃沖       | Hiroshige | #8e877c       | 0.53       | 0.4      | 7.3     |
+| 41 | 5            | Ochanomizu in the Eastern Capital                                                 | 東都御茶の水   | Hiroshige | #8d887a       | 0.53       | 0.39     | 7.23    |
+| 42 | 6            | Ryōgoku in the Eastern Capital                                                    | 東都両ごく     | Hiroshige | #868279       | 0.51       | 0.44     | 7.33    |
+| 43 | 7            | The Sumida Embankment in the Eastern Capital                                      | 東都墨田堤     | Hiroshige | #a59c94       | 0.62       | 0.48     | 7.71    |
+| 44 | 8            | Mt. Asuka in the Eastern Capital                                                  | 東都あすか山   | Hiroshige | #878d7a       | 0.54       | 0.57     | 7.72    |
+| 45 | 9            | The Teahouse with the View of Mt. Fuji at Zōshigaya                               | 雑司かや不二見 | Hiroshige | #8b8175       | 0.51       | 0.41     | 7.39    |
+| 46 | 10           | Twilight Hill at Meguro in the Eastern Capital                                    | 東都目黒夕日か | Hiroshige | #99927f       | 0.57       | 0.57     | 7.82    |
+| 47 | 11           | Wild Goose Hill and the Tone River                                                | 鴻之臺戸根川   | Hiroshige | #9e907a       | 0.57       | 0.39     | 7.27    |
+| 48 | 12           | Koganei in Musashi Province                                                       | 武蔵小金井     | Hiroshige | #7d888b       | 0.52       | 0.56     | 7.83    |
+| 49 | 13           | The Tama River in Musashi Province                                                | 武蔵玉川       | Hiroshige | #8c897e       | 0.54       | 0.41     | 7.37    |
+| 50 | 14           | Koshigaya in Musashi Province                                                     | 武蔵越が谷在   | Hiroshige | #869882       | 0.57       | 0.49     | 7.8     |
+| 51 | 15           | Noge and Yokohama in Musashi Province                                             | 武蔵野毛横濱   | Hiroshige | #9c9580       | 0.58       | 0.37     | 7.15    |
+| 52 | 16           | Cherry Blossoms at Honmoku in Musashi Province                                    | 武蔵本牧のはな | Hiroshige | #9c9486       | 0.59       | 0.38     | 7.11    |
+| 53 | 17           | The Sea off the Miura Peninsula in Sagami Province                                | 相州三浦之海上 | Hiroshige | #aca28d       | 0.64       | 0.34     | 6.85    |
+| 54 | 18           | The Sagami River                                                                  | さがみ川       | Hiroshige | #968d7d       | 0.56       | 0.39     | 7.1     |
+| 55 | 19           | The Seven Ri Beach in Sagami Province                                             | 相摸七里か濱   | Hiroshige | #87857d       | 0.52       | 0.37     | 7.38    |
+| 56 | 20           | The Entrance gate at Enoshima in Sagami Province                                  | 相摸江之島入口 | Hiroshige | #8d8777       | 0.53       | 0.3      | 6.87    |
+| 57 | 21           | Lake at Hakone                                                                    | はこ根の湖すい | Hiroshige | #93917d       | 0.57       | 0.43     | 7.37    |
+| 58 | 22           | The Izu Mountains                                                                 | 伊豆の山中     | Hiroshige | #85977b       | 0.56       | 0.55     | 7.72    |
+| 59 | 23           | The Sea off Satta in Suruga Province                                              | 駿河薩タ之海上 | Hiroshige | #888076       | 0.51       | 0.41     | 7.23    |
+| 60 | 24           | The Pine Forest of Miho in Suruga Province                                        | 駿河三保之松原 | Hiroshige | #958d7c       | 0.56       | 0.38     | 7.01    |
+| 61 | 25           | Fuji on the left of the Tōkaidō Road                                              | 東海堂左り不二 | Hiroshige | #8b8678       | 0.53       | 0.37     | 7.28    |
+| 62 | 26           | The Ōi River between Suruga and Totomi Provinces                                  | 駿遠大井川     | Hiroshige | #91897d       | 0.54       | 0.46     | 7.52    |
+| 63 | 27           | Futami Bay in Ise Province                                                        | 伊勢二見か浦   | Hiroshige | #a2a1a4       | 0.64       | 0.55     | 7.67    |
+| 64 | 28           | Lake Suwa in Shinano Province                                                     | 信州諏訪之湖   | Hiroshige | #8a9184       | 0.56       | 0.55     | 7.72    |
+| 65 | 29           | Shiojiri Pass in Shinano Province                                                 | 信濃塩尻峠     | Hiroshige | #859097       | 0.56       | 0.56     | 7.84    |
+| 66 | 30           | Misaka Pass in Kai Province                                                       | 甲斐御坂越     | Hiroshige | #747e67       | 0.47       | 0.6      | 7.94    |
+| 67 | 31           | The Ōtsuki Plain in Kai Province                                                  | 甲斐大月の原   | Hiroshige | #959183       | 0.57       | 0.4      | 7.31    |
+| 68 | 32           | Dog Eye Pass in Kai Province                                                      | 甲斐犬目峠     | Hiroshige | #8e8072       | 0.52       | 0.44     | 7.36    |
+| 69 | 33           | Kogane Plain in Shimōsa Province                                                  | 下総小金原     | Hiroshige | #8d8572       | 0.52       | 0.41     | 7.5     |
+| 70 | 34           | Kuroto Bay in Kazusa Province                                                     | 上総黒戸の浦   | Hiroshige | #8e897b       | 0.54       | 0.4      | 7.1     |
+| 71 | 35           | Mt. Kanō in Kazusa Province                                                       | 上総鹿埜山     | Hiroshige | #8e887b       | 0.54       | 0.41     | 7.3     |
+| 72 | 36           | The Hota Coast in Awa Province                                                    | 房州保田ノ海岸 | Hiroshige | #8c877a       | 0.53       | 0.41     | 7.49    |
++----+--------------+-----------------------------------------------------------------------------------+----------------+-----------+---------------+------------+----------+---------+
+sqlite> SELECT "japanese_title", "english_title" FROM "views";
++----------------+-----------------------------------------------------------------------------------+
+| japanese_title |                                   english_title                                   |
++----------------+-----------------------------------------------------------------------------------+
+| 神奈川沖浪裏   | The Great Wave off Kanagawa                                                       |
+| 凱風快晴       | Fine Wind, Clear Morning                                                          |
+| 山下白雨       | Thunderstorm Beneath the Summit                                                   |
+| 深川万年橋下   | Under Mannen Bridge at Fukagawa                                                   |
+| 東都駿台       | Sundai, Edo                                                                       |
+| 青山円座松     | Cushion Pine at Aoyama                                                            |
+| 武州千住       | Senju, Musashi But                                                                |
+| 甲州犬目峠     | Inume Pass, Kōshū                                                                 |
+| 尾州不二見原   | Fuji View Field in Owari Province                                                 |
+| 駿州江尻       | Ejiri in Suruga Province                                                          |
+| 江都駿河町三井 | A sketch of the Mitsui shop in Suruga in Edo                                      |
+| 御厩川岸より両 | Sunset across the Ryōgoku bridge from the bank of the Sumida River at Onmayagashi |
+| 五百らかん寺さ | Sazai hall - Temple of Five Hundred Rakan                                         |
+| 礫川雪の旦     | Tea house at Koishikawa. The morning after a snowfall                             |
+| 下目黒         | Shimomeguro                                                                       |
+| 隠田の水車     | Watermill at Onden                                                                |
+| 相州江の島     | Enoshima in Sagami Province                                                       |
+| 東海道江尻田子 | Shore of Tago Bay, Ejiri at Tōkaidō                                               |
+| 東海道吉田     | Yoshida at Tōkaidō                                                                |
+| 上総の海路     | The Kazusa Province sea route                                                     |
+| 江戸日本橋     | Nihonbashi bridge in Edo                                                          |
+| 隅田川関屋の里 | Barrier Town on the Sumida River                                                  |
+| 登戸浦         | Bay of Noboto                                                                     |
+| 相州箱根湖水   | The lake of Hakone in Sagami Province                                             |
+| 甲州三坂水面   | Mount Fuji reflects in Lake Kawaguchi, seen from the Misaka Pass in Kai Province  |
+| 東海道保土ケ谷 | Hodogaya on the Tōkaidō                                                           |
+| 武州玉川       | Tama River in Musashi Province                                                    |
+| 東都浅草本願寺 | Asakusa Hongan-ji temple in the Eastern capital                                   |
+| 武陽佃島       | Tsukuda Island in Musashi Province                                                |
+| 相州七里浜     | Shichiri beach in Sagami Province                                                 |
+| 相州梅沢庄     | Umezawa in Sagami Province                                                        |
+| 甲州石班沢     | Kajikazawa in Kai Province                                                        |
+| 甲州三嶌越     | Mishima Pass in Kai Province                                                      |
+| 遠江山中       | Mount Fuji from the mountains of Tōtōmi                                           |
+| 信州諏訪湖     | A View of Mount Fuji Across Lake Suwa                                             |
+| 常州牛掘       | Ushibori in Hitachi Province                                                      |
+| 東都一石ばし   | Ichikoku Bridge in the Eastern Capital                                            |
+| 東都駿河町     | The Suruga District in the Eastern Capital                                        |
+| 東都数奇屋河岸 | Sukiyagashi in the Eastern Capital                                                |
+| 東都佃沖       | Off Tsukuda Island in the Eastern Capital                                         |
+| 東都御茶の水   | Ochanomizu in the Eastern Capital                                                 |
+| 東都両ごく     | Ryōgoku in the Eastern Capital                                                    |
+| 東都墨田堤     | The Sumida Embankment in the Eastern Capital                                      |
+| 東都あすか山   | Mt. Asuka in the Eastern Capital                                                  |
+| 雑司かや不二見 | The Teahouse with the View of Mt. Fuji at Zōshigaya                               |
+| 東都目黒夕日か | Twilight Hill at Meguro in the Eastern Capital                                    |
+| 鴻之臺戸根川   | Wild Goose Hill and the Tone River                                                |
+| 武蔵小金井     | Koganei in Musashi Province                                                       |
+| 武蔵玉川       | The Tama River in Musashi Province                                                |
+| 武蔵越が谷在   | Koshigaya in Musashi Province                                                     |
+| 武蔵野毛横濱   | Noge and Yokohama in Musashi Province                                             |
+| 武蔵本牧のはな | Cherry Blossoms at Honmoku in Musashi Province                                    |
+| 相州三浦之海上 | The Sea off the Miura Peninsula in Sagami Province                                |
+| さがみ川       | The Sagami River                                                                  |
+| 相摸七里か濱   | The Seven Ri Beach in Sagami Province                                             |
+| 相摸江之島入口 | The Entrance gate at Enoshima in Sagami Province                                  |
+| はこ根の湖すい | Lake at Hakone                                                                    |
+| 伊豆の山中     | The Izu Mountains                                                                 |
+| 駿河薩タ之海上 | The Sea off Satta in Suruga Province                                              |
+| 駿河三保之松原 | The Pine Forest of Miho in Suruga Province                                        |
+| 東海堂左り不二 | Fuji on the left of the Tōkaidō Road                                              |
+| 駿遠大井川     | The Ōi River between Suruga and Totomi Provinces                                  |
+| 伊勢二見か浦   | Futami Bay in Ise Province                                                        |
+| 信州諏訪之湖   | Lake Suwa in Shinano Province                                                     |
+| 信濃塩尻峠     | Shiojiri Pass in Shinano Province                                                 |
+| 甲斐御坂越     | Misaka Pass in Kai Province                                                       |
+| 甲斐大月の原   | The Ōtsuki Plain in Kai Province                                                  |
+| 甲斐犬目峠     | Dog Eye Pass in Kai Province                                                      |
+| 下総小金原     | Kogane Plain in Shimōsa Province                                                  |
+| 上総黒戸の浦   | Kuroto Bay in Kazusa Province                                                     |
+| 上総鹿埜山     | Mt. Kanō in Kazusa Province                                                       |
+| 房州保田ノ海岸 | The Hota Coast in Awa Province                                                    |
++----------------+-----------------------------------------------------------------------------------+
+sqlite> views.db < 1.sql
+   ...> ;
+Parse error: near "views": syntax error
+  views.db < 1.sql ;
+  ^--- error here
+sqlite> views.db < 1.sql;
+Parse error: near "views": syntax error
+  views.db < 1.sql;
+  ^--- error here
+sqlite> ^C;
+sqlite> .read 1.sql
+sqlite> ;
+sqlite> .read 1.sql;
+Error: cannot open "1.sql;"
+sqlite> sqlite3 views.db < 1.sql
+   ...> ;
+Parse error: near "sqlite3": syntax error
+  sqlite3 views.db < 1.sql ;
+  ^--- error here
+sqlite> sqlite3 views.db < 1.sql;
+Parse error: near "sqlite3": syntax error
+  sqlite3 views.db < 1.sql;
+  ^--- error here
+sqlite> SELECT "average_color" 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hokusai' 
+   ...> AND "english_title" LIKE '%river%';
++---------------+
+| average_color |
++---------------+
+| #8ba1a5       |
+| #b3b399       |
+| #a6a799       |
++---------------+
+sqlite> SELECT COUNT(*) 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hokusai' 
+   ...> AND "english_title" LIKE '%Fuji%';
++----------+
+| COUNT(*) |
++----------+
+| 4        |
++----------+
+sqlite> SELECT COUNT(*) 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hiroshige' 
+   ...> AND "english_title" LIKE 'Eastern Capital';
++----------+
+| COUNT(*) |
++----------+
+| 0        |
++----------+
+sqlite> SELECT COUNT(*) 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hiroshige' 
+   ...> AND "english_title" LIKE '%Eastern Capital%';
++----------+
+| COUNT(*) |
++----------+
+| 9        |
++----------+
+sqlite> SELECT MAX(contrast)  
+   ...> FROM "views" 
+   ...> WHERE "artis" = "Hokusai";
++---------------+
+| MAX(contrast) |
++---------------+
+| NULL          |
++---------------+
+sqlite> SELECT MAX(contrast) AS "Maximum Contrast" 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hokusai';
++------------------+
+| Maximum Contrast |
++------------------+
+| 0.65             |
++------------------+
+sqlite> SELECT ROUND(AVG (entropy)  2) AS "Hiroshige Average Entropy" 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hiroshige';
+Parse error: near "2": syntax error
+  SELECT ROUND(AVG (entropy)  2) AS "Hiroshige Average Entropy"  FROM "views"  W
+                error here ---^
+sqlite> SELECT ROUND(AVG (entropy), 2) AS "Hiroshige Average Entropy" 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hiroshige';
++---------------------------+
+| Hiroshige Average Entropy |
++---------------------------+
+| 7.42                      |
++---------------------------+
+sqlite> SELECT "english_title" 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hiroshige' 
+   ...> ORDER BY "brightness" DESC ;
++-----------------------------------------------------+
+|                    english_title                    |
++-----------------------------------------------------+
+| The Sea off the Miura Peninsula in Sagami Province  |
+| Futami Bay in Ise Province                          |
+| The Sumida Embankment in the Eastern Capital        |
+| Sukiyagashi in the Eastern Capital                  |
+| Cherry Blossoms at Honmoku in Musashi Province      |
+| Noge and Yokohama in Musashi Province               |
+| Twilight Hill at Meguro in the Eastern Capital      |
+| Wild Goose Hill and the Tone River                  |
+| Koshigaya in Musashi Province                       |
+| Lake at Hakone                                      |
+| The Ōtsuki Plain in Kai Province                    |
+| The Sagami River                                    |
+| The Izu Mountains                                   |
+| The Pine Forest of Miho in Suruga Province          |
+| Lake Suwa in Shinano Province                       |
+| Shiojiri Pass in Shinano Province                   |
+| The Suruga District in the Eastern Capital          |
+| Mt. Asuka in the Eastern Capital                    |
+| The Tama River in Musashi Province                  |
+| The Ōi River between Suruga and Totomi Provinces    |
+| Kuroto Bay in Kazusa Province                       |
+| Mt. Kanō in Kazusa Province                         |
+| Off Tsukuda Island in the Eastern Capital           |
+| Ochanomizu in the Eastern Capital                   |
+| The Entrance gate at Enoshima in Sagami Province    |
+| Fuji on the left of the Tōkaidō Road                |
+| The Hota Coast in Awa Province                      |
+| Koganei in Musashi Province                         |
+| The Seven Ri Beach in Sagami Province               |
+| Dog Eye Pass in Kai Province                        |
+| Kogane Plain in Shimōsa Province                    |
+| Ryōgoku in the Eastern Capital                      |
+| The Teahouse with the View of Mt. Fuji at Zōshigaya |
+| The Sea off Satta in Suruga Province                |
+| Ichikoku Bridge in the Eastern Capital              |
+| Misaka Pass in Kai Province                         |
++-----------------------------------------------------+
+sqlite> SELECT "english_title" 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hiroshige' 
+   ...> ORDER BY "brightness" DESC 
+   ...> LIMIT 5;
++----------------------------------------------------+
+|                   english_title                    |
++----------------------------------------------------+
+| The Sea off the Miura Peninsula in Sagami Province |
+| Futami Bay in Ise Province                         |
+| The Sumida Embankment in the Eastern Capital       |
+| Sukiyagashi in the Eastern Capital                 |
+| Cherry Blossoms at Honmoku in Musashi Province     |
++----------------------------------------------------+
+sqlite> SELECT english_title 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hokusai' 
+   ...> ORDER BY "contrast" ASC 
+   ...> LIMIT 5;
++----------------------------------------------------------------------------------+
+|                                  english_title                                   |
++----------------------------------------------------------------------------------+
+| Mount Fuji reflects in Lake Kawaguchi, seen from the Misaka Pass in Kai Province |
+| Kajikazawa in Kai Province                                                       |
+| Shimomeguro                                                                      |
+| Bay of Noboto                                                                    |
+| Ushibori in Hitachi Province                                                     |
++----------------------------------------------------------------------------------+
+sqlite> SELECT "artist","english_title"
+   ...> FROM "views" 
+   ...> ORDER BY "brightness" DESC ;
++-----------+-----------------------------------------------------------------------------------+
+|  artist   |                                   english_title                                   |
++-----------+-----------------------------------------------------------------------------------+
+| Hokusai   | A View of Mount Fuji Across Lake Suwa                                             |
+| Hokusai   | Fuji View Field in Owari Province                                                 |
+| Hokusai   | Nihonbashi bridge in Edo                                                          |
+| Hokusai   | Shichiri beach in Sagami Province                                                 |
+| Hokusai   | Mount Fuji reflects in Lake Kawaguchi, seen from the Misaka Pass in Kai Province  |
+| Hokusai   | Inume Pass, Kōshū                                                                 |
+| Hokusai   | Shimomeguro                                                                       |
+| Hokusai   | The Kazusa Province sea route                                                     |
+| Hokusai   | Barrier Town on the Sumida River                                                  |
+| Hokusai   | Mishima Pass in Kai Province                                                      |
+| Hokusai   | Mount Fuji from the mountains of Tōtōmi                                           |
+| Hokusai   | Ejiri in Suruga Province                                                          |
+| Hokusai   | Watermill at Onden                                                                |
+| Hokusai   | Shore of Tago Bay, Ejiri at Tōkaidō                                               |
+| Hokusai   | Yoshida at Tōkaidō                                                                |
+| Hokusai   | Tsukuda Island in Musashi Province                                                |
+| Hokusai   | Ushibori in Hitachi Province                                                      |
+| Hokusai   | Under Mannen Bridge at Fukagawa                                                   |
+| Hokusai   | Sazai hall - Temple of Five Hundred Rakan                                         |
+| Hokusai   | Tea house at Koishikawa. The morning after a snowfall                             |
+| Hokusai   | Bay of Noboto                                                                     |
+| Hokusai   | Tama River in Musashi Province                                                    |
+| Hokusai   | Asakusa Hongan-ji temple in the Eastern capital                                   |
+| Hokusai   | Sundai, Edo                                                                       |
+| Hiroshige | The Sea off the Miura Peninsula in Sagami Province                                |
+| Hiroshige | Futami Bay in Ise Province                                                        |
+| Hokusai   | Senju, Musashi But                                                                |
+| Hokusai   | A sketch of the Mitsui shop in Suruga in Edo                                      |
+| Hokusai   | Enoshima in Sagami Province                                                       |
+| Hokusai   | Hodogaya on the Tōkaidō                                                           |
+| Hiroshige | The Sumida Embankment in the Eastern Capital                                      |
+| Hokusai   | The Great Wave off Kanagawa                                                       |
+| Hokusai   | Sunset across the Ryōgoku bridge from the bank of the Sumida River at Onmayagashi |
+| Hiroshige | Sukiyagashi in the Eastern Capital                                                |
+| Hokusai   | Umezawa in Sagami Province                                                        |
+| Hokusai   | The lake of Hakone in Sagami Province                                             |
+| Hokusai   | Kajikazawa in Kai Province                                                        |
+| Hiroshige | Cherry Blossoms at Honmoku in Musashi Province                                    |
+| Hiroshige | Noge and Yokohama in Musashi Province                                             |
+| Hiroshige | Twilight Hill at Meguro in the Eastern Capital                                    |
+| Hiroshige | Wild Goose Hill and the Tone River                                                |
+| Hiroshige | Koshigaya in Musashi Province                                                     |
+| Hiroshige | Lake at Hakone                                                                    |
+| Hiroshige | The Ōtsuki Plain in Kai Province                                                  |
+| Hiroshige | The Sagami River                                                                  |
+| Hiroshige | The Izu Mountains                                                                 |
+| Hiroshige | The Pine Forest of Miho in Suruga Province                                        |
+| Hiroshige | Lake Suwa in Shinano Province                                                     |
+| Hiroshige | Shiojiri Pass in Shinano Province                                                 |
+| Hokusai   | Cushion Pine at Aoyama                                                            |
+| Hiroshige | The Suruga District in the Eastern Capital                                        |
+| Hiroshige | Mt. Asuka in the Eastern Capital                                                  |
+| Hiroshige | The Tama River in Musashi Province                                                |
+| Hiroshige | The Ōi River between Suruga and Totomi Provinces                                  |
+| Hiroshige | Kuroto Bay in Kazusa Province                                                     |
+| Hiroshige | Mt. Kanō in Kazusa Province                                                       |
+| Hiroshige | Off Tsukuda Island in the Eastern Capital                                         |
+| Hiroshige | Ochanomizu in the Eastern Capital                                                 |
+| Hiroshige | The Entrance gate at Enoshima in Sagami Province                                  |
+| Hiroshige | Fuji on the left of the Tōkaidō Road                                              |
+| Hiroshige | The Hota Coast in Awa Province                                                    |
+| Hiroshige | Koganei in Musashi Province                                                       |
+| Hiroshige | The Seven Ri Beach in Sagami Province                                             |
+| Hiroshige | Dog Eye Pass in Kai Province                                                      |
+| Hiroshige | Kogane Plain in Shimōsa Province                                                  |
+| Hiroshige | Ryōgoku in the Eastern Capital                                                    |
+| Hiroshige | The Teahouse with the View of Mt. Fuji at Zōshigaya                               |
+| Hiroshige | The Sea off Satta in Suruga Province                                              |
+| Hiroshige | Ichikoku Bridge in the Eastern Capital                                            |
+| Hiroshige | Misaka Pass in Kai Province                                                       |
+| Hokusai   | Fine Wind, Clear Morning                                                          |
+| Hokusai   | Thunderstorm Beneath the Summit                                                   |
++-----------+-----------------------------------------------------------------------------------+
+sqlite> SELECT "artist","english_title"
+   ...> FROM "views" 
+   ...> ORDER BY "brightness" DESC 
+   ...>   LIMIT 1;
++---------+---------------------------------------+
+| artist  |             english_title             |
++---------+---------------------------------------+
+| Hokusai | A View of Mount Fuji Across Lake Suwa |
++---------+---------------------------------------+
+sqlite> SELECT "english_title", "entropy" AS "Complexity Score" 
+   ...> FROM "views" 
+   ...> WHERE "artist" = 'Hokusai' 
+   ...> ORDER BY "entropy" DESC 
+   ...> LIMIT 5;
++-----------------------------------------------------------------------------------+------------------+
+|                                   english_title                                   | Complexity Score |
++-----------------------------------------------------------------------------------+------------------+
+| Sunset across the Ryōgoku bridge from the bank of the Sumida River at Onmayagashi | 7.67             |
+| Hodogaya on the Tōkaidō                                                           | 7.57             |
+| Yoshida at Tōkaidō                                                                | 7.49             |
+| Barrier Town on the Sumida River                                                  | 7.48             |
+| Tama River in Musashi Province                                                    | 7.48             |
++-----------------------------------------------------------------------------------+------------------+
+sqlite> 
